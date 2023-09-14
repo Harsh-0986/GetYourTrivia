@@ -1,5 +1,5 @@
 import {Check, ChevronsUpDown} from "lucide-react"
-
+import {Loader} from '@/assets/'
 import {cn} from "@/lib/utils"
 import {Button} from "@/components/ui/button"
 import {
@@ -146,6 +146,7 @@ const questionType = [
 ]
 
 const Options = () => {
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [questions, setQuestions] = useState(null);
     const [questionsNumber, setQuestionsNumber] = useState(5);
@@ -163,6 +164,7 @@ const Options = () => {
     }
 
     const submit = async () => {
+        setLoading(true)
         const cValue = categories.find(category => category.label.toLowerCase() === categoryValue)?.value
         const dValue = difficultyLevel.find(category => category.label.toLowerCase() === difficultyValue)?.value
         const tValue = questionType.find(category => category.label.toLowerCase() === questionValue)?.value
@@ -174,10 +176,12 @@ const Options = () => {
 
         if (responseCode === 1) {
             setError("You asked for too many questions!")
+            setLoading(false)
             return
         }
 
         setQuestions(responseJSON?.results)
+        setLoading(false)
     }
 
     if (questions) {
@@ -335,7 +339,8 @@ const Options = () => {
             </div>
             <div className="flex items-center justify-between md:justify-end my-4 gap-2">
                 <Button variant={"outline"} onClick={() => chooseRandom()}>Choose for me!</Button>
-                <Button onClick={() => submit()}>Submit</Button>
+                <Button disabled={loading} onClick={() => submit()}>{!loading ? "Submit" :
+                    <img className={"h-8 bg-transparent w-8 object-contain"} src={Loader} alt={"loader"}/>}</Button>
             </div>
             <div className={"text-center my-4"}>
                 <span className={"text-center font-bold text-red-500 text-xl"}>{error}</span>
