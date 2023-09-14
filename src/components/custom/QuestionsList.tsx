@@ -18,7 +18,6 @@ interface propsType {
 }
 
 const QuestionsList = (props: propsType) => {
-    console.log(props.questions)
 
     const showOptions = (inc: string[], cor: string) => {
         let opts = inc
@@ -62,6 +61,7 @@ const QuestionsList = (props: propsType) => {
                                 showOptions(question.incorrect_answers, question.correct_answer)
                                     .map((option: string, index1: number) => (
                                         <div
+                                            key={`${index.toString()} + ${index1.toString()}`}
                                             id={`div-${index.toString() + index1.toString()}`}
                                             className="flex items-center space-x-2 my-1 px-4 border border-gray-100 hover:border-gray-200 cursor-pointer py-4 rounded-md">
                                             <RadioGroupItem value={`option-${index.toString() + index1.toString()}`}
@@ -74,6 +74,7 @@ const QuestionsList = (props: propsType) => {
                                     ))
                             }
                             <Button
+                                key={index}
                                 onClick={() => checkAnswer(question.incorrect_answers, question.correct_answer, index)}
                                 className={"justify-self-end w-[30%]"} variant={"outline"}>Check Answer!</Button>
                         </RadioGroup>

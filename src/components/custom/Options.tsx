@@ -167,7 +167,6 @@ const Options = () => {
         const dValue = difficultyLevel.find(category => category.label.toLowerCase() === difficultyValue)?.value
         const tValue = questionType.find(category => category.label.toLowerCase() === questionValue)?.value
         const url = `https://opentdb.com/api.php?amount=${questionsNumber}&category=${cValue}&difficulty=${dValue}&type=${tValue}`
-        console.log(url)
 
         const response = await fetch(url)
         const responseJSON = await response.json()
