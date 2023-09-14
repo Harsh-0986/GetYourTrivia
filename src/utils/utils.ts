@@ -1,4 +1,4 @@
-export function shuffle(array) {
+export function shuffle(array: string[]) {
     let currentIndex = array.length, randomIndex;
 
     // While there remain elements to shuffle.
@@ -16,14 +16,14 @@ export function shuffle(array) {
     return array;
 }
 
-export function convert(string) {
+export function convert(string: string) {
     string = string.replace(/(&quot;)/g, "\"")
     return string.replace(/&#(?:x([\da-f]+)|(\d+));/ig, function (_, hex, dec) {
         return String.fromCharCode(dec || +('0x' + hex))
     })
 }
 
-export function removeDuplicates(arr) {
+export function removeDuplicates(arr: string[]) {
     return arr.filter((item,
                        index) => arr.indexOf(item) === index);
 }
