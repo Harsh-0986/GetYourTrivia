@@ -115,10 +115,6 @@ const categories = [
         label: "Entertainment: Cartoon & Animations",
         value: 32
     },
-    {
-        label: "Any Category",
-        value: 0
-    }
 ]
 const difficultyLevel = [
     {

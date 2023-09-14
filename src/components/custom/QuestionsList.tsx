@@ -94,6 +94,11 @@ const QuestionsList = (props: propsType) => {
                     </section>
                 )
             }
+            <section className={"section-snap flex items-center justify-center flex-col gap-4"}>
+                <span className={"font-bold text-xl"}>Congratulations on completing your trivia!</span>
+                <Button className={""} variant={"outline"} onClick={() => location.reload()}>Take another
+                    trivia!</Button>
+            </section>
         </main>
     )
 }
