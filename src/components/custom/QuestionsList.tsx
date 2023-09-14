@@ -29,19 +29,30 @@ const QuestionsList = (props: propsType) => {
 
     const checkAnswer = (inc: string[], cor: string, index: number) => {
         const arrLength = inc.length
-        for (let index1 = 0; index1 <= arrLength; index1++) {
-            const selOpt = document.getElementById(`div-${index.toString() + index1.toString()}`)
-            selOpt?.classList.remove("border-gray-100")
+        console.log(arrLength)
+        for (let index1 = 0; index1 <= Math.min(arrLength, 3); index1++) {
+            const selDiv = document.getElementById(`div-${index.toString() + index1.toString()}`)
+            const selOpt = document.getElementById(`label-${index.toString() + index1.toString()}`)
+            console.log(`option-${index.toString() + index1.toString()}`)
+            selDiv?.classList.remove("border-gray-100")
             if (selOpt?.innerText.toLowerCase() === cor.toLowerCase()) {
-                selOpt.classList.add("border-green-300")
+                selDiv?.classList.add("border-green-300")
             } else {
-                selOpt?.classList.add("border-red-300")
+                selDiv?.classList.add("border-red-300")
             }
 
-            window.scrollBy({
-                top: 20,
-                behavior: 'smooth'
-            })
+            if (!(navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i))) {
+                window.scrollBy({
+                    top: 20,
+                    behavior: 'smooth'
+                })
+            }
         }
     }
 
@@ -67,6 +78,7 @@ const QuestionsList = (props: propsType) => {
                                             <RadioGroupItem value={`option-${index.toString() + index1.toString()}`}
                                                             id={`option-${index.toString() + index1.toString()}`}/>
                                             <Label className={"cursor-pointer"}
+                                                   id={`label-${index.toString() + index1.toString()}`}
                                                    htmlFor={`option-${index.toString() + index1.toString()}`}>
                                                 {convert(option)}
                                             </Label>
@@ -76,7 +88,8 @@ const QuestionsList = (props: propsType) => {
                             <Button
                                 key={index}
                                 onClick={() => checkAnswer(question.incorrect_answers, question.correct_answer, index)}
-                                className={"justify-self-end w-[30%]"} variant={"outline"}>Check Answer!</Button>
+                                className={"justify-self-end w-[45%] md:w-[30%]"} variant={"outline"}>Check
+                                Answer!</Button>
                         </RadioGroup>
                     </section>
                 )
