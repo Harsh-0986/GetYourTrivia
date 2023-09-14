@@ -18,6 +18,7 @@ export function shuffle(array: string[]) {
 
 export function convert(string: string) {
     string = string.replace(/(&quot;)/g, "\"")
+    string = string.replace(/(&amp;)/g, "&")
     return string.replace(/&#(?:x([\da-f]+)|(\d+));/ig, function (_, hex, dec) {
         return String.fromCharCode(dec || +('0x' + hex))
     })
